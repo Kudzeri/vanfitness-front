@@ -7,7 +7,8 @@ const AuthPage = ({ type }) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let input = e.target;
+    setFormData({ ...formData, [input.name]: input.value });
   };
 
   const handleSubmit = (e) => {
