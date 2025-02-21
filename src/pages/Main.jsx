@@ -1,5 +1,6 @@
 import VanDarkholme from "../assets/vandarkholme.png";
 import { motion } from "framer-motion";
+import MotivationCard from "../components/MotivationCard";
 
 function Main() {
   return (
@@ -17,24 +18,13 @@ function Main() {
           Fucking slaves, get your ass back to gym!
         </p>
         <h2 className="text-md font-bold mb-4 text-gray-400">- Van Darkholme</h2>
-        
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 bg-gray-800 rounded-md text-center">
-            <h3 className="text-xl font-bold mb-2">🔥 Hardcore Motivation</h3>
-            <p>Listen to Van's quotes and stay disciplined.</p>
-          </div>
-          <div className="p-4 bg-gray-800 rounded-md text-center">
-            <h3 className="text-xl font-bold mb-2">💪 Track Your Progress</h3>
-            <p>Record your workouts and never skip gym day.</p>
-          </div>
-          <div className="p-4 bg-gray-800 rounded-md text-center">
-            <h3 className="text-xl font-bold mb-2">🎯 Achieve New Goals</h3>
-            <p>Unlock achievements and push your limits.</p>
-          </div>
+    <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <MotivationCard title={'🔥 Hardcore Motivation'} description={"Listen to Van's quotes and stay disciplined."} />
+        <MotivationCard title={'💪 Track Your Progress'} description={"Record your workouts and never skip gym day."} />
+        <MotivationCard title={'🎯 Achieve New Goals'} description={"Unlock achievements and push your limits."} />
         </div>
-        
         <div className="mt-6">
-          <button className="bg-blue-500 px-6 py-3 rounded-md text-lg font-bold hover:bg-blue-700 transition">
+          <button className="bg-red-500 px-6 py-3 rounded-md text-lg font-bold hover:bg-red-700 transition">
             Start Training Now
           </button>
         </div>

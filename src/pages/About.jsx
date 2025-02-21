@@ -31,7 +31,7 @@ function About() {
           <span className="font-bold text-rainbow"> "Discipline is everything!"</span>
         </p>
         <div className="text-center mt-6">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+          <button className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700 transition">
             Start Training Now
           </button>
         </div>
