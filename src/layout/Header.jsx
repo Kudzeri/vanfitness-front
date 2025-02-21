@@ -8,7 +8,6 @@ const Header = () => {
   return (
     <header className="relative bg-gray-800">
       <div className="mx-auto flex h-16 items-center justify-between px-4 py-3 md:px-7">
-        {/* Логотип и десктопное меню */}
         <div className="flex items-center gap-8">
           <div className="flex items-center">
             <img
@@ -19,17 +18,14 @@ const Header = () => {
             <h1 className="cursor-default text-2xl text-rainbow">Vanfit</h1>
           </div>
 
-          {/* Десктопное меню */}
           <div className="hidden md:flex">
             <Navbar />
           </div>
         </div>
 
-        {/* Кнопка входа и гамбургер-меню */}
         <div className="flex items-center gap-4">
           <NavLink to={"/login"} className="text-yellow-400 hover:text-yellow-300 cursor-pointer text-lg" >Login</NavLink>
 
-          {/* Гамбургер-кнопка для мобильных */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-gray-300 hover:text-white focus:outline-none"
@@ -60,7 +56,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Мобильное меню */}
       {isMenuOpen && (
         <div className="absolute w-full bg-gray-800 md:hidden">
           <Navbar isMobile onLinkClick={() => setIsMenuOpen(false)} />
