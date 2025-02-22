@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
 import api from "../axios";
+import useUser from "../context/UserContext";
 
 const AuthPage = ({ type }) => {
+  const { setUser } = useUser(); // Получаем функцию обновления контекста
+  const navigate = useNavigate();
   const isLogin = type === "login";
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
@@ -20,19 +23,21 @@ const AuthPage = ({ type }) => {
     setError("");
 
     try {
-      const endpoint = isLogin ? "/auth/login" : "/auth/register"; 
+      const endpoint = isLogin ? "/auth/login" : "/auth/register";
       const response = await api.post(endpoint, {
         username: formData.username,
         password: formData.password,
       });
 
-      // console.log("Success:", response.data);
-
       if (isLogin) {
-        localStorage.setItem("token", response.data.token);
-        window.location.href = "/dashboard";
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        
+        setUser({ username: formData.username, token });
+
+        navigate("/dashboard");
       } else {
-        window.location.href = "/login"; 
+        navigate("/login");
       }
     } catch (err) {
       setError(err.response?.data?.error || "Something went wrong");

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
-import { NavLink } from "react-router-dom";
-import api from "../axios";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const token = localStorage.getItem("token");
   const handleLogout = async() => {
     localStorage.removeItem("token");
-    window.location.href = "/login";
+    navigate("/login");
   }
 
   return (
