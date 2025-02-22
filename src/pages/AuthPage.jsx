@@ -26,7 +26,7 @@ const AuthPage = ({ type }) => {
         password: formData.password,
       });
 
-      console.log("Success:", response.data);
+      // console.log("Success:", response.data);
 
       if (isLogin) {
         localStorage.setItem("token", response.data.token);

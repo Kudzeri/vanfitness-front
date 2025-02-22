@@ -1,9 +1,15 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { NavLink } from "react-router-dom";
+import api from "../axios";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const token = localStorage.getItem("token");
+  const handleLogout = async() => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  }
 
   return (
     <header className="relative bg-gray-800">
@@ -24,7 +30,27 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <NavLink to={"/login"} className="text-yellow-400 hover:text-yellow-300 cursor-pointer text-lg" >Login</NavLink>
+          {token ? (
+            <div className="flex items-center gap-4">
+              <NavLink
+                to="/dashboard"
+                className="cursor-pointer text-white hover:text-yellow-400"
+              >
+                Dashboard
+              </NavLink>
+              <button className="hover:text-red-500 cursor-pointer"
+              onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <NavLink
+              to="/login"
+              className="cursor-pointer text-gray-300 hover:text-white"
+            >
+              Login
+            </NavLink>
+          )}
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
