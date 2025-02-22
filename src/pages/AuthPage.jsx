@@ -1,19 +1,44 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
+import api from "../axios";
 
 const AuthPage = ({ type }) => {
   const isLogin = type === "login";
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     let input = e.target;
     setFormData({ ...formData, [input.name]: input.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted", formData);
+    setLoading(true);
+    setError("");
+
+    try {
+      const endpoint = isLogin ? "/auth/login" : "/auth/register"; 
+      const response = await api.post(endpoint, {
+        username: formData.username,
+        password: formData.password,
+      });
+
+      console.log("Success:", response.data);
+
+      if (isLogin) {
+        localStorage.setItem("token", response.data.token);
+        window.location.href = "/dashboard";
+      } else {
+        window.location.href = "/login"; 
+      }
+    } catch (err) {
+      setError(err.response?.data?.error || "Something went wrong");
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -22,12 +47,18 @@ const AuthPage = ({ type }) => {
         <h2 className="text-3xl font-bold mb-6 text-center text-rainbow">
           {isLogin ? "Login" : "Register"}
         </h2>
+
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
         <AuthForm
           isLogin={isLogin}
           formData={formData}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
+
+        {loading && <p className="text-center text-gray-400 mt-2">Loading...</p>}
+
         <div className="text-center mt-4">
           <NavLink
             to={isLogin ? "/register" : "/login"}
