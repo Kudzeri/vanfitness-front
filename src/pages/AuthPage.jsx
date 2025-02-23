@@ -5,7 +5,7 @@ import api from "../axios";
 import useUser from "../context/UserContext";
 
 const AuthPage = ({ type }) => {
-  const { setUser } = useUser(); // Получаем функцию обновления контекста
+  const { setUser } = useUser();
   const navigate = useNavigate();
   const isLogin = type === "login";
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -32,10 +32,12 @@ const AuthPage = ({ type }) => {
       if (isLogin) {
         const token = response.data.token;
         localStorage.setItem("token", token);
-        
-        setUser({ username: formData.username, token });
 
-        navigate("/dashboard");
+        const userResponse = await api.get("/user/me");
+
+        setUser({ username: userResponse.data.username, token });
+
+        navigate("/dashboard"); 
       } else {
         navigate("/login");
       }
@@ -62,7 +64,9 @@ const AuthPage = ({ type }) => {
           handleSubmit={handleSubmit}
         />
 
-        {loading && <p className="text-center text-gray-400 mt-2">Loading...</p>}
+        {loading && (
+          <p className="text-center text-gray-400 mt-2">Loading...</p>
+        )}
 
         <div className="text-center mt-4">
           <NavLink

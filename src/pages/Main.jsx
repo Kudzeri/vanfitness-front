@@ -1,8 +1,14 @@
 import VanDarkholme from "../assets/vandarkholme.png";
 import { motion } from "framer-motion";
 import MotivationCard from "../components/MotivationCard";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    const token = localStorage.getItem("token");
+    token ? navigate("/dashboard") : navigate("/login");
+  };
   return (
     <div>
       <div className="container mx-auto p-6 text-center">
@@ -24,7 +30,7 @@ function Main() {
         <MotivationCard title={'🎯 Achieve New Goals'} description={"Unlock achievements and push your limits."} />
         </div>
         <div className="mt-6">
-          <button className="bg-red-500 px-6 py-3 rounded-md text-lg font-bold hover:bg-red-700 transition">
+          <button className="bg-red-500 px-6 py-3 rounded-md text-lg font-bold hover:bg-red-700 transition" onClick={handleLogin}>
             Start Training Now
           </button>
         </div>

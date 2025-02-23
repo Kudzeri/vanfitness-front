@@ -12,7 +12,7 @@ export const UserContextProvider = ({ children }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await api.get("/auth/user");
+                const response = await api.get("/user/me");
                 setUser(prev => ({
                     ...prev,
                     username: response.data.username,
@@ -26,7 +26,7 @@ export const UserContextProvider = ({ children }) => {
     }, []); 
 
     return (
-        <UserContext.Provider value={user}>
+        <UserContext.Provider value={{ ...user, setUser }}>
             {children}
         </UserContext.Provider>
     );

@@ -1,9 +1,22 @@
 import useUser from "../context/UserContext";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const { username } = useUser();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!username) {
+      localStorage.removeItem("token");
+      navigate("/login");
+    }
+  }, [username, navigate]);
+
+  if (!username) {
+    return <div className="text-center text-xl">Please relogin. Redirecting...</div>;
+  }
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
