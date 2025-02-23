@@ -7,10 +7,12 @@ import About from "./pages/About";
 import AuthPage from "./pages/AuthPage";
 import { UserContextProvider } from "./context/UserContext";
 import Dashboard from "./pages/Dashboard";
+import CreateProfile from "./pages/CreateProfile";
 
 createRoot(document.getElementById("root")).render(
-  <UserContextProvider>
+  
     <Router>
+      <UserContextProvider>
       <Header />
       <div className="container mx-auto p-6">
         <Routes>
@@ -19,8 +21,9 @@ createRoot(document.getElementById("root")).render(
           <Route path="/login" element={<AuthPage type="login" />} />
           <Route path="/register" element={<AuthPage type="register" />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/create-profile" element={<CreateProfile />} />
         </Routes>
       </div>
+      </UserContextProvider>
     </Router>
-  </UserContextProvider>
 );

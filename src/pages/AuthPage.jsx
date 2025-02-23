@@ -24,13 +24,12 @@ const AuthPage = ({ type }) => {
 
     try {
       const endpoint = isLogin ? "/auth/login" : "/auth/register";
-      const response = await api.post(endpoint, {
-        username: formData.username,
-        password: formData.password,
-      });
+      const response = await api.post(endpoint, formData);
 
       if (isLogin) {
         const token = response.data.token;
+        if (!token) throw new Error("No token received");
+
         localStorage.setItem("token", token);
 
         const userResponse = await api.get("/user/me");
@@ -64,8 +63,15 @@ const AuthPage = ({ type }) => {
           handleSubmit={handleSubmit}
         />
 
-        {loading && (
+        {loading ? (
           <p className="text-center text-gray-400 mt-2">Loading...</p>
+        ) : (
+          <button
+            onClick={handleSubmit}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md w-full mt-4 transition-transform transform hover:scale-105 duration-200"
+          >
+            {isLogin ? "Login" : "Register"}
+          </button>
         )}
 
         <div className="text-center mt-4">
