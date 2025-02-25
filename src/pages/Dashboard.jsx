@@ -1,57 +1,78 @@
 import useUser from "../context/UserContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import GachiMotivation from "../components/GachiMotivation";
+import YourProfile from "../components/YourProfile";
+import TrainingStats from "../components/TrainingStats";
 
 function Dashboard() {
-  const { username, isLoading, setUser } = useUser();
+  const {
+    username,
+    prefix,
+    level,
+    height,
+    weight,
+    age,
+    sex,
+    token,
+    isLoading,
+    setUser,
+  } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading && !username) {
+    if (!isLoading && !token) {
       localStorage.removeItem("token");
       navigate("/login");
     }
-  }, [username, navigate, isLoading]);
+  }, [token, navigate, isLoading]);
 
   if (isLoading) {
     return <div className="text-center text-xl">Loading...</div>;
   }
 
-  if (!username) {
-    return <div className="text-center text-xl">Please relogin. Redirecting...</div>;
+  if (!token) {
+    return (
+      <div className="text-center text-xl">Please relogin. Redirecting...</div>
+    );
   }
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setUser(null); 
+    setUser(null);
     navigate("/login");
   };
 
   return (
     <div className="container mx-auto p-6 max-w-3xl">
-      <h1 className="text-3xl font-bold text-center mb-6 text-rainbow">
-        Welcome, {username || "Gachimuchi Enthusiast"}!
-      </h1>
-      <p className="text-lg text-justify mb-4">
-        You've entered the <span className="text-rainbow font-bold">Gachi Fitness Dashboard</span>.
-        Here, you can track your progress, manage your workouts, and push your limits beyond imagination.
-      </p>
-      <h2 className="text-xl font-bold mt-6 mb-2">Your Training Stats</h2>
-      <ul className="list-disc list-inside text-lg mb-4">
-        <li>🏋️‍♂️ Workouts Completed: <span className="text-gray-300">12</span></li>
-        <li>🔥 Calories Burned: <span className="text-gray-300">4500</span></li>
-        <li>💪 Discipline Level: <span className="text-gray-300">S+ Tier</span></li>
-      </ul>
-      <h2 className="text-xl font-bold mt-6 mb-2">What’s Next?</h2>
-      <p className="text-lg">
-        Keep going, brother! Your journey to true discipline is just beginning.
-        Push harder, lift heavier, and always remember:
-        <span className="font-bold text-rainbow"> "More Pain, More Gain!"</span>
-      </p>
+      <div className="flex flex-col items-center mb-6">
+        <img
+          src="https://steamuserimages-a.akamaihd.net/ugc/1657851628476889925/63F85D8D393B38EFE40D87A750E9B51918D4C55F/?imw=512&imh=512&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+          alt="Avatar"
+          className="w-24 h-24 rounded-full border-4 border-rainbow mb-4"
+        />
+        <h1 className="text-3xl font-bold text-center text-rainbow">
+          Welcome, {username || "Gachimuchi Enthusiast"}!
+        </h1>
+      </div>
+
+      <YourProfile
+        prefix={prefix}
+        level={level}
+        height={height}
+        weight={weight}
+        age={age}
+        sex={sex}
+      />
+
+      <TrainingStats workoutsCompleted={12} caloriesBurned={4500} />
+
+      <GachiMotivation level={level} />
+
       <div className="text-center mt-6">
         <button
           onClick={handleLogout}
-          className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-transform transform hover:scale-105 duration-200"
+          className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-700 transition-transform transform hover:scale-105 duration-200"
         >
           Logout
         </button>
