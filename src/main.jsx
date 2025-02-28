@@ -9,6 +9,8 @@ import { UserContextProvider } from "./context/UserContext";
 import Dashboard from "./pages/Dashboard";
 import CreateProfile from "./pages/CreateProfile";
 import EditProfile from "./pages/EditProfile";
+import WorkoutsPage from "./pages/WorkoutsPage";
+import SavedWorkouts from "./pages/SavedWorkouts";
 
 createRoot(document.getElementById("root")).render(
   
@@ -24,6 +26,9 @@ createRoot(document.getElementById("root")).render(
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/create-profile" element={<CreateProfile />} />
           <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/workouts" element={<WorkoutsPage />} />
+          <Route path="/workouts/saved" element={<SavedWorkouts />} />
+
         </Routes>
       </div>
       </UserContextProvider>
