@@ -8,6 +8,7 @@ import AuthPage from "./pages/AuthPage";
 import { UserContextProvider } from "./context/UserContext";
 import Dashboard from "./pages/Dashboard";
 import CreateProfile from "./pages/CreateProfile";
+import EditProfile from "./pages/EditProfile";
 
 createRoot(document.getElementById("root")).render(
   
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/register" element={<AuthPage type="register" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/create-profile" element={<CreateProfile />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
         </Routes>
       </div>
       </UserContextProvider>

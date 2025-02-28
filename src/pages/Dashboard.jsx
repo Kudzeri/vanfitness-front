@@ -76,6 +76,10 @@ function Dashboard() {
         >
           Logout
         </button>
+        <button
+          onClick={() => navigate("/edit-profile")}
+          className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-transform transform hover:scale-105 duration-200 ml-4"
+        >Edit profile</button>
       </div>
     </div>
   );
