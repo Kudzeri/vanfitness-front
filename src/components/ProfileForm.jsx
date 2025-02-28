@@ -14,17 +14,17 @@ const ProfileForm = ({ formData, setFormData, handleSubmit }) => {
   };
 
   const heightOptions = Array.from({ length: 101 }, (_, i) => ({
-    value: 140 + i,
+    value: `${140 + i}`, // Преобразование в строку
     label: `${140 + i} cm`,
   }));
 
   const weightOptions = Array.from({ length: 101 }, (_, i) => ({
-    value: 40 + i,
+    value: `${40 + i}`, // Преобразование в строку
     label: `${40 + i} kg`,
   }));
 
   const ageOptions = Array.from({ length: 63 }, (_, i) => ({
-    value: 18 + i,
+    value: `${18 + i}`, // Преобразование в строку
     label: `${18 + i} years`,
   }));
 
@@ -87,7 +87,10 @@ const ProfileForm = ({ formData, setFormData, handleSubmit }) => {
       <div className="text-center mt-6">
         <button
           className="bg-red-500 px-6 py-3 rounded-md text-lg font-bold hover:bg-red-700 transition-transform transform hover:scale-105 duration-200"
-          onClick={handleSubmit}
+          onClick={(e) => {
+            e.preventDefault(); // Предотвращаем дефолтное поведение кнопки
+            handleSubmit(); // Просто вызываем handleSubmit, так как e уже передан
+          }}
         >
           Save Profile
         </button>
@@ -95,5 +98,6 @@ const ProfileForm = ({ formData, setFormData, handleSubmit }) => {
     </div>
   );
 };
+
 
 export default ProfileForm;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CreateProfileForm from "../components/CreateProfileForm";
+import ProfileForm from "../components/ProfileForm";
 import api from "../axios";
 import useUser from "../context/UserContext";
 
@@ -28,7 +28,6 @@ const CreateProfile = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     setLoading(true);
     setError("");
 
@@ -62,8 +61,9 @@ const CreateProfile = () => {
 
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-        <CreateProfileForm
+        <ProfileForm
           formData={formData}
+          setFormData={setFormData}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           loading={loading}
