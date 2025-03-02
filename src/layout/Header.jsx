@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { NavLink, useNavigate } from "react-router-dom";
+import Logo from "../assets/logo.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Header = () => {
         <div className="flex items-center gap-8">
           <div className="flex items-center">
             <img
-              src="/src/assets/logo.png"
+              src={Logo}
               className="h-10 w-10 mr-2"
               alt="logo"
             />
