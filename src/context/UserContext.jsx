@@ -6,60 +6,51 @@ const UserContext = createContext(null);
 
 export const UserContextProvider = ({ children }) => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(() => ({
-        username: "",
-        prefix: "",
-        level: 0,
-        height: 0,
-        weight: 0,
-        age: 0,
-        sex: "",
-        token: localStorage.getItem("token") || null,
-    }));
-
-    const [isLoading, setIsLoading] = useState(true); 
+    const [user, setUser] = useState(null); // Теперь user начинается с `null`
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchUserData = async () => {
             const token = localStorage.getItem("token");
+            
 
             if (!token) {
+                console.log("❌ Нет токена. Выход...");
                 setIsLoading(false);
                 return;
             }
 
             try {
                 const userResponse = await api.get("/user/me");
-                let profileData = {
-                    prefix: "",
-                    level: 0,
-                    height: 0,
-                    weight: 0,
-                    age: 0,
-                    sex: "",
-                };
-
+                console.log("✅ Получены данные пользователя:", userResponse.data);
+                
+                let profileData = {};
                 try {
                     const profileResponse = await api.get("/profile/get");
                     profileData = profileResponse.data;
                 } catch (profileError) {
-                    console.error("Ошибка при получении профиля:", profileError);
+                    console.error("⚠️ Ошибка при получении профиля:", profileError);
                     if (profileError.response?.status === 404) {
                         navigate("/dashboard/create-profile");
                     }
                 }
 
-                setUser((prev) => ({
-                    ...prev,
+                const user_id = userResponse.data.id;
+                const newUser = {
+                    my_id: user_id, // Берем `id` из API
                     username: userResponse.data.username,
                     ...profileData,
                     token,
-                }));
+                };
+
+                setUser(newUser);
+                console.log("🔄 UserContext обновлен:", newUser);
+
             } catch (error) {
-                console.error("Ошибка при получении данных пользователя:", error);
+                console.error("❌ Ошибка при получении данных пользователя:", error);
                 if (error.response?.status === 401) {
                     localStorage.removeItem("token");
-                    setUser((prev) => ({ ...prev, token: null }));
+                    setUser(null);
                 }
             } finally {
                 setIsLoading(false);
@@ -70,7 +61,7 @@ export const UserContextProvider = ({ children }) => {
     }, [navigate]); 
 
     return (
-        <UserContext.Provider value={{ ...user, setUser, isLoading }}>
+        <UserContext.Provider value={{ ...user,user, setUser, isLoading }}>
             {children}
         </UserContext.Provider>
     );

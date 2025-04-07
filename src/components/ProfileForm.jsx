@@ -1,7 +1,5 @@
 import { useState } from "react";
 import Select from "react-select";
-import InputNumber from "rc-input-number";
-import "rc-input-number/assets/index.css";
 import { FaVenusMars } from "react-icons/fa";
 import Switch from "react-switch";
 

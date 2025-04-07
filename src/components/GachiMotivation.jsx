@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const GachiMotivation = ({ level }) => {
   let message;
 
@@ -36,6 +38,7 @@ const GachiMotivation = ({ level }) => {
           {level === 5 ? "Unleash your inner beast!" : "More Pain, More Gain!"}
         </span>
       </p>
+  
     </div>
   );
 };

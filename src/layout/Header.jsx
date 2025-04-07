@@ -7,21 +7,18 @@ const Header = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const token = localStorage.getItem("token");
-  const handleLogout = async() => {
+
+  const handleLogout = async () => {
     localStorage.removeItem("token");
     navigate("/login");
-  }
+  };
 
   return (
     <header className="relative bg-gray-800">
       <div className="mx-auto flex h-16 items-center justify-between px-4 py-3 md:px-7">
         <div className="flex items-center gap-8">
           <div className="flex items-center">
-            <img
-              src={Logo}
-              className="h-10 w-10 mr-2"
-              alt="logo"
-            />
+            <img src={Logo} className="h-10 w-10 mr-2" alt="logo" />
             <h1 className="cursor-default text-2xl text-rainbow">Vanfit</h1>
           </div>
 
@@ -39,8 +36,16 @@ const Header = () => {
               >
                 Dashboard
               </NavLink>
-              <button className="hover:text-red-500 cursor-pointer"
-              onClick={handleLogout}>
+              <NavLink
+                to="/daily-tracker"
+                className="cursor-pointer text-white hover:text-yellow-400"
+              >
+                Tracker
+              </NavLink>
+              <button
+                className="hover:text-red-500 cursor-pointer"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </div>

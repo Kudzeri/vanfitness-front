@@ -1,0 +1,56 @@
+/* Общий фон календаря */
+.react-calendar {
+    background-color: #1f2937; /* Темно-серый */
+    color: #e5e7eb; /* Светло-серый текст */
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Дни недели */
+  .react-calendar__month-view__weekdays {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #9ca3af; /* Серый текст */
+  }
+  
+  /* Ячейки дней */
+  .react-calendar__tile {
+    background-color: #374151; /* Темно-серый */
+    color: #e5e7eb; /* Светло-серый текст */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .react-calendar__tile:enabled:hover,
+  .react-calendar__tile:enabled:focus {
+    background-color: #4b5563; /* Более светлый серый при наведении */
+    color: #fbbf24; /* Желтый текст */
+  }
+  
+  /* Выбранный день */
+  .react-calendar__tile--active {
+    background-color: #fbbf24; /* Желтый фон */
+    color: #1f2937; /* Темный текст */
+  }
+  
+  /* Навигация (стрелки и заголовок месяца) */
+  .react-calendar__navigation {
+    background-color: #1f2937; /* Темно-серый */
+    color: #e5e7eb; /* Светло-серый текст */
+    border-bottom: 1px solid #374151;
+  }
+  
+  .react-calendar__navigation button {
+    color: #e5e7eb; /* Светло-серый текст */
+  }
+  
+  .react-calendar__navigation button:enabled:hover {
+    background-color: #374151; /* Более светлый серый при наведении */
+  }
+  
+  /* Отключенные дни */
+  .react-calendar__tile--disabled {
+    background-color: #1f2937; /* Темно-серый */
+    color: #6b7280; /* Темно-серый текст */
+  }

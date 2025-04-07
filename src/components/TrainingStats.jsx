@@ -25,6 +25,14 @@ const TrainingStats = ({ workoutsCompleted, caloriesBurned }) => {
           Workout List </button>
           <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" onClick={() => navigate("/workouts/saved")}> View
           Saved Workouts </button>
+
+          
+      </div>
+
+      <div className="flex justify-center mt-6">
+        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded w-full" onClick={() => navigate("/posts")}>
+          See Posts
+        </button>
       </div>
     </div>
   );
